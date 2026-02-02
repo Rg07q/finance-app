@@ -1,0 +1,201 @@
+/* ===== MAIN (stable layout + cards + accounts grid) ===== */
+
+:root{
+  --sb-w: 220px;
+  --sb-collapsed: 64px;
+  --content-max: 1400px;
+}
+
+html, body { overflow-x: hidden; }
+
+.main{
+  min-height: 100vh;
+  padding: 26px;
+  transition: margin-left .25s ease;
+  overflow-x: hidden;
+}
+
+/* ✅ single source of truth for layout */
+.app:not(.sb-collapsed) .main { margin-left: var(--sb-w); }
+.app.sb-collapsed .main { margin-left: var(--sb-collapsed); }
+
+/* page container */
+.page{
+  width: 100%;
+  max-width: var(--content-max);
+  margin: 0;
+}
+.page.hidden{ display:none !important; }
+
+/* header */
+.page-header{
+  width:100%;
+  max-width: var(--content-max);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+.page-header h1{
+  margin:0;
+  font-size: 34px;
+  font-weight: 900;
+}
+.page-header .actions{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+/* header select */
+.page-header select{
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.06);
+  color: inherit;
+}
+body.light .page-header select{
+  border: 1px solid rgba(0,0,0,.12);
+  background: rgba(0,0,0,.03);
+}
+
+/* cards */
+.card{
+  width:100%;
+  max-width: var(--content-max);
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255,255,255,.06);
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  overflow: hidden;
+}
+body.light .card{
+  background: rgba(0,0,0,.03);
+  box-shadow: 0 10px 26px rgba(0,0,0,.08);
+}
+
+/* buttons */
+.page button{
+  border:none;
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-weight: 900;
+  cursor:pointer;
+  background: linear-gradient(135deg,#2f80ed,#56ccf2);
+  color:#fff;
+  transition: transform .12s ease, opacity .12s ease;
+}
+.page button:hover{ opacity:.95; }
+.page button:active{ transform: translateY(1px); }
+
+/* lists */
+ul{ list-style:none; padding:0; margin:0; }
+ul li{
+  padding: 12px 14px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  background: rgba(255,255,255,.06);
+}
+body.light ul li{ background: rgba(0,0,0,.04); }
+
+/* chips */
+.chip-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom: 12px;
+}
+.chip{
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 900;
+  cursor:pointer;
+  background: rgba(255,255,255,.08);
+}
+body.light .chip{ background: rgba(0,0,0,.06); }
+.chip.active{
+  background: linear-gradient(135deg,#2f80ed,#56ccf2);
+  color:#fff;
+}
+
+/* responsive */
+@media (max-width: 980px){
+  .main{ padding: 18px; }
+}
+@media (max-width: 680px){
+  .page-header{ flex-direction: column; align-items:flex-start; }
+  .page-header .actions{ width:100%; justify-content: space-between; }
+}
+
+/* ===== Accounts cards ===== */
+.acc-grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+@media (max-width:1100px){ .acc-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width:700px){ .acc-grid{ grid-template-columns: 1fr; } }
+
+.acc-card2{
+  border-radius: 18px;
+  padding: 14px;
+  background: rgba(255,255,255,.06);
+  box-shadow: 0 10px 26px rgba(0,0,0,.16);
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+}
+body.light .acc-card2{ background: rgba(0,0,0,.03); box-shadow: 0 10px 22px rgba(0,0,0,.08); }
+
+.acc-row{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.acc-left{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  min-width: 0;
+}
+.acc-badge{
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight: 900;
+  background: rgba(255,255,255,.10);
+}
+body.light .acc-badge{ background: rgba(0,0,0,.06); }
+
+.acc-name{
+  font-weight: 900;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.acc-balance{
+  font-weight: 900;
+  font-size: 18px;
+}
+.acc-actions{
+  display:flex;
+  gap: 8px;
+}
+.acc-actions .btn-mini{
+  border:none;
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-weight: 900;
+  cursor:pointer;
+  background: rgba(255,255,255,.10);
+  color: inherit;
+}
+body.light .acc-actions .btn-mini{ background: rgba(0,0,0,.06); }
+.acc-actions .btn-mini:hover{ opacity:.92; }
